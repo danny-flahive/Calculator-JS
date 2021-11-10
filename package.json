@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/danny-flahive/Calculator-JS/issues"
   },
-  "homepage": "https://github.com/danny-flahive/Calculator-JS#readme"
+  "homepage": "https://github.com/danny-flahive/Calculator-JS#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
