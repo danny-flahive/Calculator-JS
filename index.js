@@ -35,22 +35,8 @@ function PerformVowelCalculation() {
     var userString = readLine.prompt().toUpperCase();
     var vowelCounter = {A : 0, E: 0, I: 0, O: 0, U: 0};
     for (let i = 0; i < userString.length; i++) {
-        switch (userString.charAt(i)) {
-            case 'A':
-                vowelCounter.A++
-                break;
-            case 'E':
-                vowelCounter.E++
-                break
-            case 'I':
-                vowelCounter.I++
-                break;
-            case 'O':
-                vowelCounter.O++;
-                break;
-            case 'U':
-                vowelCounter.U++;
-                break;
+        if (vowelCounter[userString.charAt(i)] != undefined) {
+            vowelCounter[userString.charAt(i)]++;
         }
     }
     console.log(`Vowel Counts: \nA: ${vowelCounter.A}\nE: ${vowelCounter.E}\nI: ${vowelCounter.I}\nO: ${vowelCounter.O}\nU: ${vowelCounter.U}`);
