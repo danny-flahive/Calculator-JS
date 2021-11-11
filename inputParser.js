@@ -2,9 +2,9 @@ const readLine = require('readline-sync');
 
 exports.GetMenuChoice = function() {
     var menuChoice;
-    var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n(0 to exit)`;
+    var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n\t3) Question Calculator\n(0 to exit)`;
     menuChoice = this.GetNumberInput(menuString);
-    while (menuChoice > 2 || menuChoice < 0) {
+    while (menuChoice > 3 || menuChoice < 0) {
         menuChoice = this.GetNumberInput("Please enter a valid menu choice.");
     }
     return menuChoice;
