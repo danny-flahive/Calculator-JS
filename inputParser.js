@@ -2,9 +2,9 @@ const readLine = require('readline-sync');
 
 exports.GetMenuChoice = function() {
     var menuChoice;
-    var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n(0 to exit)`;
+    var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n\t3) Question Calculator\n(0 to exit)`;
     menuChoice = this.GetNumberInput(menuString);
-    while (menuChoice > 2 || menuChoice < 0) {
+    while (menuChoice > 3 || menuChoice < 0) {
         menuChoice = this.GetNumberInput("Please enter a valid menu choice.");
     }
     return menuChoice;
@@ -49,4 +49,21 @@ exports.AskToContinue = function() {
         input = this.GetStringInput("Please enter a valid response (Y/N): ");
     }
     return input == "Y";
+}
+
+exports.GetQuestion = function(message) {
+    var question = this.GetStringInput(message);
+    while (!this.CheckValidQuestion(question)) {
+        question = this.GetStringInput("Please enter a properly formed question.");
+    }
+    return question;
+}
+
+exports.CheckValidQuestion = function(question) {
+    let digits = new RegExp(/[0-9]+/);
+    let operators = new RegExp(/\s[\+|\-|\*|\/]\s/);
+    let startOfQuestion = new RegExp(digits.source + operators.source + digits.source);
+    let endOfQuestion = new RegExp("(" + operators.source + digits.source + ")*");
+    let validQuestion = new RegExp("^(" + startOfQuestion.source + endOfQuestion.source + ")$");
+    return validQuestion.test(question);
 }

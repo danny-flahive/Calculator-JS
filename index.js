@@ -23,6 +23,9 @@ function MainLoop() {
             case 2:
                 vowelCounter.PerformCalculation();
                 break;
+            case 3:
+                arithmetic.AnswerQuestion(inputParser.GetQuestion("Enter question: "));
+                break;
         }
     }
 }
