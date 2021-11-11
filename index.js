@@ -1,7 +1,12 @@
 const readLine = require('readline-sync');
 
 PrintWelcome();
-PerformCalculation();
+
+var continueCalculation = true;
+while(continueCalculation) {
+    PerformCalculation();
+    continueCalculation = AskToContinue()
+}
 
 function PerformCalculation() {
     var operator = GetOperator()
@@ -62,4 +67,13 @@ function GetOperator() {
 function PrintWelcome() {
     console.log('Welcome to the Calculator');
     console.log('=========================');
+}
+
+function AskToContinue() {
+    var input;
+    do {
+        console.log("Do you wish to perform another calculation? (Y/N): ")
+        input = readLine.prompt();
+    } while (input != "Y" && input != "N");
+    return input == "Y";
 }
