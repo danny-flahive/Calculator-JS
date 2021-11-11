@@ -1,14 +1,62 @@
 const readLine = require('readline-sync');
+const EXIT = 0
+const NUMERIC_MODE = 1;
+const VOWEL_MODE = 2;
 
 PrintWelcome();
 
 var continueCalculation = true;
 while(continueCalculation) {
-    PerformCalculation();
-    continueCalculation = AskToContinue()
+    var menuChoice = GetMenuChoice();
+    switch(menuChoice) {
+        case 0:
+            continueCalculation = false;
+            break;
+        case 1:
+            PerformNumericCalculation();
+            break;
+        case 2:
+            PerformVowelCalculation();
+            break;
+    }
 }
 
-function PerformCalculation() {
+function GetMenuChoice() {
+    var menuChoice;
+    var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n(0 to exit)`;
+    do {
+        menuChoice = GetIntInput(menuString);
+    } while (menuChoice > 2 || menuChoice < 0)
+    return menuChoice;
+}
+
+function PerformVowelCalculation() {
+    console.log('Please enter a string: ');
+    var userString = readLine.prompt().toUpperCase();
+    var vowelCounter = {A : 0, E: 0, I: 0, O: 0, U: 0};
+    for (let i = 0; i < userString.length; i++) {
+        switch (userString.charAt(i)) {
+            case 'A':
+                vowelCounter.A++
+                break;
+            case 'E':
+                vowelCounter.E++
+                break
+            case 'I':
+                vowelCounter.I++
+                break;
+            case 'O':
+                vowelCounter.O++;
+                break;
+            case 'U':
+                vowelCounter.U++;
+                break;
+        }
+    }
+    console.log(`Vowel Counts: \nA: ${vowelCounter.A}\nE: ${vowelCounter.E}\nI: ${vowelCounter.I}\nO: ${vowelCounter.O}\nU: ${vowelCounter.U}`);
+}
+
+function PerformNumericCalculation() {
     var operator = GetOperator()
     var numberOfValues = GetIntInput('How many numbers do you want to enter? ');
     var values = GetIntArr(numberOfValues);
@@ -44,7 +92,7 @@ function GetIntInput(message) {
 function GetIntArr(numberOfValues) {
     var values = [];
     for (let i = 0; i < numberOfValues; i++) {
-        values.push(GetIntInput('Enter number ' + (i + 1) + ': '));
+        values.push(GetIntInput(`Enter number ${i+1}: `));
     }
     return values;
 }
