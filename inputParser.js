@@ -3,9 +3,10 @@ const readLine = require('readline-sync');
 exports.GetMenuChoice = function() {
     var menuChoice;
     var menuString = `\nPlease select a menu choice.\n\t1) Numeric Calculator\n\t2) Vowel Counter\n(0 to exit)`;
-    do {
-        menuChoice = this.GetNumberInput(menuString);
-    } while (menuChoice > 2 || menuChoice < 0)
+    menuChoice = this.GetNumberInput(menuString);
+    while (menuChoice > 2 || menuChoice < 0) {
+        menuChoice = this.GetNumberInput("Please enter a valid menu choice.");
+    }
     return menuChoice;
 }
 
@@ -16,24 +17,21 @@ exports.GetStringInput = function(message) {
 
 exports.GetNumberInput = function(message) {
     var value;
-    do {
-        console.log(message);
+    console.log(message);
+    value = parseInt(readLine.prompt());
+    while (isNaN(value)) {
+        console.log("Please enter a valid number. ");
         value = parseInt(readLine.prompt());
-    } while (isNaN(value));
+    }
     return value;
 }
 
 exports.GetOperator = function() {
     var validOperator = false;
-    var operator;
-    do {
-        if (operator != "+" && operator != "-" && operator != "/" && operator != "*") {
-            operator = this.GetStringInput("Enter an operator (+, -, *, /)");
-        }
-        else {
-            validOperator = true;
-        }
-    } while (!validOperator);
+    var operator = this.GetStringInput("Enter an operator (+, -, *, /)");
+    while (operator != "+" && operator != "-" && operator != "/" && operator != "*") {
+        operator = this.GetStringInput("Please enter a valid operator.");
+    }
     return operator;
 }
 
@@ -46,9 +44,9 @@ exports.GetNumberArray = function(numberOfValues) {
 }
 
 exports.AskToContinue = function() {
-    var input;
-    do {
-        input = this.GetStringInput("Do you wish to perform another calculation? (Y/N): ")
-    } while (input != "Y" && input != "N");
+    var input = this.GetStringInput("Do you wish to perform another calculation? (Y/N): ");
+    while (input != "Y" && input != "N") {
+        input = this.GetStringInput("Please enter a valid response (Y/N): ");
+    }
     return input == "Y";
 }
