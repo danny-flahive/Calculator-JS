@@ -24,12 +24,10 @@ exports.PerformCalculation = function() {
     console.log("The result is: " + result);
 }
 
+//TODO: Add bracket handling
+//TODO: Treat */ and +- with same precedence, go with the one closest to the left first
 exports.AnswerQuestion = function(question) {
-    var questionTokens = [];
-    questionTokens = question.split(" ");
-    if (isNaN(parseInt(questionTokens[questionTokens.length-1]))) {
-        throw new Error("Question not properly formed (doesn't end with a number).");
-    }
+    var questionTokens = question.split(" ");
     //Calculate the result incrementally, in line with the order of operations
     //Works on two operands with one operator at a time, until all calculations are complete & a final result produced
     while (questionTokens.length > 1) {

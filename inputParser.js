@@ -50,3 +50,20 @@ exports.AskToContinue = function() {
     }
     return input == "Y";
 }
+
+exports.GetQuestion = function(message) {
+    var question = this.GetStringInput(message);
+    while (!this.CheckValidQuestion(question)) {
+        question = this.GetStringInput("Please enter a properly formed question.");
+    }
+    return question;
+}
+
+exports.CheckValidQuestion = function(question) {
+    let digits = new RegExp(/[0-9]+/);
+    let operators = new RegExp(/\s[\+|\-|\*|\/]\s/);
+    let startOfQuestion = new RegExp(digits.source + operators.source + digits.source);
+    let endOfQuestion = new RegExp("(" + operators.source + digits.source + ")*");
+    let validQuestion = new RegExp("^(" + startOfQuestion.source + endOfQuestion.source + ")$");
+    return validQuestion.test(question);
+}
